@@ -9,49 +9,29 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-type RootStackParams = {
-  Home: undefined
+import Home from "./src/page/Home/Home";
+import Date from "./src/page/Date/Date";
+
+
+export type RootStackParams = {
+  Home: undefined,
+  Date: undefined
 }
 
-const RootStack = createStackNavigator<RootStackParams>();
-
+const RootStack = createNativeStackNavigator<RootStackParams>();
 const App = () => {
-
 
   return (
     <NavigationContainer>
-
+      <RootStack.Navigator initialRouteName={"Home"} screenOptions={{headerShown: false}}>
+        <RootStack.Screen name={'Home'} component={Home}/>
+        <RootStack.Screen name={"Date"} component={Date}/>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
