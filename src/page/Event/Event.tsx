@@ -1,46 +1,65 @@
-import React, {memo, useMemo} from 'react'
-import {SafeAreaView, Text, View} from "react-native";
-import {StackNavigationProp} from '@react-navigation/stack';
+import React, {memo, useMemo, useState} from 'react'
+import {
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import {RootStackParams} from "../../../App";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
-import {DateStyle} from "./Date.styles";
+import PastEvent from "../../component/PastEvent/PastEvent";
+import {createStackNavigator} from "@react-navigation/stack";
+import EventPage1 from "../../component/Event/EventPage1/EventPage1";
+import EventPage2 from "../../component/Event/EventPage2/EventPage2";
+import EventPage3 from "../../component/Event/EventPage3/EventPage3";
+import EventPage4 from "../../component/Event/EventPage4/EventPage4";
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParams, 'Event'>;
 
+// const EventStack = createStackNavigator<RootStackParams>();
+export interface EventProps {
+  page1: undefined,
+  page2: undefined
+  page3: undefined
+  page4: undefined
+}
+
+const EventStack = createStackNavigator<EventProps>();
+
 const Event = memo(({route, navigation}: HomeScreenProps) => {
+  const [gap, setGap] = useState(16)
+  const [offset, setOffset] = useState(20)
 
-  console.log(route)
-  const handleONProps = () => {
-  }
+  const {height, width} = Dimensions.get('window');
+  const [year, setYear] = useState<number>(0);
+  const [month, setMonth] = useState<number>(0);
 
-  const renderEventItem = useMemo(() => {
-
-    return new Array(10).fill(0).map((e, i) => {
-      return (
-        <View style={DateStyle.eventItem} key={i}>
-          <View>
-            <Text>여기 가는걸로 합시다</Text>
-            {/*<Text>2022-02-02</Text>*/}
-          </View>
-          <View>
-            <Text>-2</Text>
-          </View>
-        </View>
-      )
-    })
-  }, [])
+  // const renderEventItem = useMemo(() => {
+  //   const now = new Date();
+  //   const testDate = new Date(2022, 1, 10);
+  //   const nextDate = testDate.getDate()
+  //   const nowDate = now.getDate()
+  //   const interval = nextDate - nowDate;
+  //
+  //   return new Array(3).fill(0).map((e, i) => {
+  //     return (
+  //       <TouchableOpacity
+  //         key={i}
+  //         onPress={() => {
+  //           navigation.navigate("EventDetail" as RootStackParams[EventDetail], {data: e} as any)
+  //         }}
+  //       >
+  //         <EventItem width={width} interval={interval}/>
+  //       </TouchableOpacity>
+  //     )
+  //   })
+  // }, [])
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={DateStyle.container}>
-        <View style={DateStyle.header}>
-          <Text style={{fontSize: 20}}>이벤트</Text>
-        </View>
-        <View style={DateStyle.eventContainer}>
-          {renderEventItem}
-        </View>
-      </View>
-    </SafeAreaView>
+    <EventStack.Navigator initialRouteName={"Page1"} screenOptions={{headerShown: false}}>
+      <EventStack.Screen name={'Page1'} component={EventPage1}/>
+      <EventStack.Screen name={'Page2'} component={EventPage2} options={{gestureEnabled: true}}/>
+      <EventStack.Screen name={'Page3'} component={EventPage3} options={{gestureEnabled: true}}/>
+      <EventStack.Screen name={'Page4'} component={EventPage4} options={{gestureEnabled: false}}/>
+    </EventStack.Navigator>
   )
 })
 

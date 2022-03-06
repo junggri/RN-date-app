@@ -1,6 +1,6 @@
 import React, {FC, memo} from 'react'
 import {View, Text, Image} from "react-native";
-import {EventStyle} from "../Event/Event.styles";
+import {EventStyle} from "../../page/Event/Event.styles";
 
 
 interface Props {

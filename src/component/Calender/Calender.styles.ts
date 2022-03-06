@@ -1,13 +1,8 @@
 import {StyleSheet} from "react-native";
+import border from "../../libs/setBorder";
 
 //3ECC3E
-const border = (): {} => {
-  return {
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "black",
-  }
-}
+
 const boxShadow = (): {} => {
   return {
     shadowColor: '#4d4d4d',
@@ -25,6 +20,7 @@ export const styles = StyleSheet.create({
     paddingRight: 20,
     display: 'flex',
     justifyContent: 'center',
+    // backgroundColor: "white"
   },
   box: {
     display: 'flex',
@@ -35,11 +31,14 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: "row",
     justifyContent: 'space-between',
-    alignItems: "center"
+    alignItems: "center",
+    // ...border(['a']),
+    paddingHorizontal: 10,
+    paddingVertical: 10
 
   },
   date: {
-    fontSize: 20,
+    fontSize: 27,
     marginRight: 5,
     fontWeight: '500'
   },
@@ -50,8 +49,9 @@ export const styles = StyleSheet.create({
   header: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 30
+    marginTop: 10,
   },
+
   day: {
     display: 'flex',
     flexDirection: 'row',
@@ -59,11 +59,12 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dayBackground: {
-    width: 35,
-    height: 35,
+    width: 30,
+    height: 30,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 50
+
+    // ...border(['a'])
   },
 })

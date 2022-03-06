@@ -1,12 +1,17 @@
 import React, {memo, useEffect, useMemo, useState} from 'react'
-import {Button, Dimensions, GestureResponderEvent, LayoutChangeEvent, Text, TouchableWithoutFeedback, View} from "react-native";
+import {
+  LayoutChangeEvent,
+  Text,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
 import {styles} from "./Calender.styles"
-import useGetKstTime from "../hooks/useGetKstTime";
-import Arrow from "../public/images/arrow2.svg";
+import useGetKstTime from "../../hooks/useGetKstTime";
+import Arrow from "../../public/images/arrow2.svg";
+import FontText from "../../Component-System/FontText/FontText";
 
 const Calender = memo(() => {
   const dateNow = useGetKstTime();
-  const {height, width} = Dimensions.get('window');
   const [containerWidth, setContainerWidth] = useState<number>(0)
   const [current, setCurrent] = useState<{ year: number, month: number }>({
     year: 0,
@@ -77,7 +82,7 @@ const Calender = memo(() => {
             }]}
             >
               <View style={{
-                backgroundColor: '#0F3AD1',
+                backgroundColor: 'black',
                 width: 5,
                 height: 5,
                 borderRadius: 50,
@@ -94,15 +99,15 @@ const Calender = memo(() => {
             <View style={[styles.day, {
               width: containerWidth / 7,
               height: containerWidth / 7,
-
             }]}>
               <View style={[styles.dayBackground, {
                 backgroundColor: e === day ? '#0F3AD1' : "transparent",
                 borderRadius: 50,
-                opacity: e === day ? 0.2 : 1,
               }]}>
                 <Text style={{
                   color: e === day ? "white" : "black",
+                  fontWeight: e === day ? "800" : "500",
+                  fontSize: 17
                 }}>
                   {e}
                 </Text>
@@ -119,7 +124,7 @@ const Calender = memo(() => {
     return data.map((e) => {
       return (
         <View key={e} style={[styles.day, {width: (containerWidth / 7), height: containerWidth / 7}]}>
-          <Text style={{color: '#0F3AD1'}}>{e}</Text>
+          <FontText size={"l"} weight={"bold"} type={"main"}>{e}</FontText>
         </View>
       )
     })
@@ -157,6 +162,7 @@ const Calender = memo(() => {
       <View style={styles.box} onLayout={handleLayout}>
         {renderCalender}
       </View>
+
     </View>
   )
 })
