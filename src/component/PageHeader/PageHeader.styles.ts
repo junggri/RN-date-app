@@ -15,7 +15,6 @@ const padding = 10;
 
 export const styles = StyleSheet.create({
   container: {
-    // ...border(['a']),
     width: '100%',
     height: 130,
   },
@@ -28,7 +27,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingBottom: 10,
-    paddingRight: 20
+    paddingRight: 20,
   },
   logoText: {
     backgroundColor: "#0F3AD1",

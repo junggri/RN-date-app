@@ -37,7 +37,7 @@ const RootStack = createStackNavigator<RootStackParams>();
 const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName={"Home"} screenOptions={{headerShown: false}}>
+      <RootStack.Navigator initialRouteName={"Place"} screenOptions={{headerShown: false}}>
         <RootStack.Screen name={'Home'} component={Home}/>
         <RootStack.Screen name={"Event"} component={Event} options={{gestureEnabled: false}}/>
         <RootStack.Screen name={"EventDetail"} component={EventDetail}/>

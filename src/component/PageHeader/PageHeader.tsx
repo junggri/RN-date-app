@@ -18,7 +18,7 @@ const PageHeader: FC<Props> = memo(({canGoBack = true, header}) => {
       <TouchableWithoutFeedback onPress={() => {
         navigation.goBack()
       }}>
-        <View style={{...border(['a'])}}>
+        <View>
           <View style={styles.button}>
             {canGoBack && <Arrow2 width={20} height={20}/>}
             {header &&
