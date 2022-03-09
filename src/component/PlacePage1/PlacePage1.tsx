@@ -1,11 +1,8 @@
 import React, {FC, memo, useEffect, useRef, useState} from "react"
 import {
   Animated,
-  Button,
   Dimensions,
   Easing,
-  LayoutChangeEvent,
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -89,6 +86,17 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
     setChangeHeight(new Animated.Value(0))
   }
 
+  const onClickCloseButton = () => {
+    setIsSelect(true);
+    Animated.timing(decrease, {
+      toValue: 1,
+      duration: 400,
+      easing: Easing.linear,
+      useNativeDriver: false
+    }).start()
+    setChangeHeight(new Animated.Value(0))
+  }
+
   const maxHeight = changeHeight.interpolate({
     inputRange: [0, 1],
     outputRange: [0, height]
@@ -111,11 +119,10 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
     ]).start()
   }, [])
 
-  console.log(place)
   return (
     <View style={{width: '100%', position: "absolute", height: "100%", backgroundColor: "white"}}>
       <View onLayout={(e) => setHeaderHeight(e.nativeEvent.layout.height)} style={{zIndex: 99}}>
-        <PageHeader/>
+        <PageHeader header={"PLACE"}/>
       </View>
       <View style={{height: '100%'}}>
         <Animated.View style={{
@@ -125,6 +132,15 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
           bottom: 0,
           zIndex: 1,
         }}>
+          <View style={styles.closeButtonContainer}>
+            <TouchableOpacity onPress={onClickCloseButton}>
+              <View style={styles.closeButton}>
+                <FontText size={"l"} weight={'bold'}>
+                  닫기
+                </FontText>
+              </View>
+            </TouchableOpacity>
+          </View>
           <Postcode
             style={[{width: width, height: height}]}
             jsOptions={{animation: true}}
@@ -146,86 +162,30 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
             </View>
           </TouchableOpacity>
         </Animated.View>
+        {place &&
         <View style={[styles.resultBox, {height: height - headerHeight}]}>
-          <PlaceResult/>
+           <PlaceResult coordinate={coordinate} place={place}/>
+           <View style={styles.buttonBox}>
+              <TouchableOpacity onPress={onPress}>
+                 <View style={styles.flagButton}>
+                    <FontText weight={"bold"} size={"m"}>
+                       재검색
+                    </FontText>
+                 </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate("PlacePage2")
+              }}>
+                 <View style={styles.flagButton}>
+                    <FontText weight={"bold"} size={"m"}>
+                       등록
+                    </FontText>
+                 </View>
+              </TouchableOpacity>
+           </View>
         </View>
+        }
       </View>
-      {/*<SafeAreaView style={[styles.container]}>*/}
-      {/*  <Animated.View style={*/}
-      {/*    [styles.postcodeBox,*/}
-      {/*      {*/}
-      {/*        height: !isSelect ? maxHeight : decreaseHeight,*/}
-      {/*        overflow: "hidden",*/}
-      {/*      }*/}
-      {/*    ]*/}
-      {/*  }>*/}
-      {/*    <Postcode*/}
-      {/*      style={[{width: width, height: height}]}*/}
-      {/*      jsOptions={{animation: true}}*/}
-      {/*      onSelected={(data) => handleSelected(data)}*/}
-      {/*      onError={(error) => console.log(error)}*/}
-      {/*    />*/}
-      {/*  </Animated.View>*/}
-      {/*</SafeAreaView>*/}
-      {/*<View style={[styles.body]}>*/}
-      {/*  <View>*/}
-      {/*    <FontText size={27} weight={"bold"} type={"main"}>*/}
-      {/*      가고싶은곳을 찾아보세요*/}
-      {/*    </FontText>*/}
-      {/*  </View>*/}
-      {/*  <TouchableOpacity onPress={onPress}>*/}
-      {/*    <View style={styles.button}>*/}
-      {/*      <FontText size={20} weight={"bold"}>*/}
-      {/*        주소검색*/}
-      {/*      </FontText>*/}
-      {/*    </View>*/}
-      {/*  </TouchableOpacity>*/}
-      {/*</View>*/}
-
-      {/*<PlaceResult/>*/}
-      {/*<View style={styles.resultBox}>*/}
-      {/*  <View style={styles.textBox}>*/}
-      {/*    <Text style={styles.h1}>가고싶은 곳을 찾아보세요</Text>*/}
-      {/*  </View>*/}
-      {/*  <View style={[styles.buttonBox, {*/}
-      {/*    justifyContent: !isSelect ? "center" : "space-between"*/}
-      {/*  }]}>*/}
-      {/*    <TouchableOpacity style={styles.button} onPress={onPress}>*/}
-      {/*      <Text style={styles.buttonText}>주소검색</Text>*/}
-      {/*    </TouchableOpacity>*/}
-      {/*    {isSelect &&*/}
-      {/*    <TouchableOpacity style={styles.button} onPress={() => {*/}
-      {/*      navigation.navigate("PlacePage2")*/}
-      {/*    }*/}
-      {/*    }>*/}
-      {/*       <Text style={styles.buttonText}>저장하기</Text>*/}
-      {/*    </TouchableOpacity>*/}
-      {/*    }*/}
-      {/*  </View>*/}
-      {/*  {place &&*/}
-      {/*  <View style={{width: '100%'}}>*/}
-      {/*     <View style={styles.result}>*/}
-      {/*        <Text style={{fontSize: 20, fontWeight: "600"}}>이 주소가 맞나요?</Text>*/}
-      {/*        <View style={{marginTop: 20}}>*/}
-      {/*           <View style={styles.resultTextBox}>*/}
-      {/*              <Text style={[styles.text, {fontSize: 17}]}>*/}
-      {/*                {place.buildingName}*/}
-      {/*              </Text>*/}
-      {/*           </View>*/}
-      {/*           <View style={styles.resultTextBox}>*/}
-      {/*              <Text style={[styles.text, {marginTop: 10, fontSize: 12}]}>*/}
-      {/*                {place.roadAddress}*/}
-      {/*              </Text>*/}
-      {/*           </View>*/}
-      {/*        </View>*/}
-      {/*     </View>*/}
-      {/*     <View style={styles.map}>*/}
-      {/*        <NaverMap coordinate={coordinate} height={350}/>*/}
-      {/*     </View>*/}
-      {/*  </View>*/}
-      {/*  }*/}
-      {/*</View>*/}
-
     </View>
   )
 })

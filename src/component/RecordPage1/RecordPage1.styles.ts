@@ -2,6 +2,8 @@ import {StyleSheet} from "react-native";
 import border from "../../libs/setBorder";
 
 
+//3ECC3E
+
 const boxShadow = (): {} => {
   return {
     shadowColor: '#4d4d4d',
@@ -13,22 +15,26 @@ const boxShadow = (): {} => {
 const padding = 10;
 
 export const styles = StyleSheet.create({
-
-  container: {
-    ...border(['t']),
-    position: 'absolute',
-    bottom: 0,
-    height: 80,
-    width: '100%',
+  scrollView: {
     display: 'flex',
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderColor: "rgba(0,0,0,0.2)"
+    flex: 1,
+
   },
-  button: {
+  headerContainer: {
+    backgroundColor: "#0F3AD1"
+  },
+  carousel: {
+    width: '100%',
+    marginTop: 20,
+    // marginLeft: 20
+  },
+  pastEvent: {
+    marginTop: 40,
+    paddingTop: 40,
+    ...border(['t']),
+    borderColor: "rgba(0,0,0,0.4)",
     flex: 1,
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: "center"
+    borderTopWidth: 0.5
   }
-})
+});

@@ -17,6 +17,21 @@ const padding = 10;
 export const styles = StyleSheet.create({
   container: {},
   header: {
-    paddingHorizontal: 20
-  }
+    paddingHorizontal: 20,
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  textHeader: {
+    margin: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: '#0F3AD1'
+  },
+  result: {
+    paddingHorizontal: 20,
+    marginTop: 6
+  },
+  map: {
+    marginTop: 20
+  },
 })

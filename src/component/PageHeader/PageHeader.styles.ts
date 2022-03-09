@@ -32,8 +32,8 @@ export const styles = StyleSheet.create({
   logoText: {
     backgroundColor: "#0F3AD1",
     marginLeft: 15,
-    paddingHorizontal: 2,
-    paddingVertical: 1
+    paddingHorizontal: 5,
+    paddingVertical: 3
   },
   headerText: {
     position: 'absolute',

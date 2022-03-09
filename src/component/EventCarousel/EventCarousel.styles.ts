@@ -2,6 +2,8 @@ import {StyleSheet} from "react-native";
 import border from "../../libs/setBorder";
 
 
+//3ECC3E
+
 const boxShadow = (): {} => {
   return {
     shadowColor: '#4d4d4d',
@@ -13,22 +15,14 @@ const boxShadow = (): {} => {
 const padding = 10;
 
 export const styles = StyleSheet.create({
-
   container: {
-    ...border(['t']),
-    position: 'absolute',
-    bottom: 0,
+    ...border(['a']),
+    borderColor: "rgba(0,0,0,0.2)",
     height: 80,
-    width: '100%',
-    display: 'flex',
-    flexDirection: "row",
+    padding: 8,
+    display: "flex",
     justifyContent: "space-between",
-    borderColor: "rgba(0,0,0,0.2)"
   },
-  button: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: "center"
-  }
-})
+  place: {},
+  address: {}
+});

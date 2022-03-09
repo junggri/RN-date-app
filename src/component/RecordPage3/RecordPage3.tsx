@@ -9,15 +9,15 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-import PageHeader from "../../PageHeader/PageHeader";
-import {styles} from "./EventPage3.styles";
+import {styles} from "./RecordPage3.styles";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
-import {EventProps} from "../../../page/Event/Event";
-import MyText from "../../../Component-System/MyText/MyText";
+import {RecordPageProps} from "../../page/Record/Record";
+import PageHeader from "../PageHeader/PageHeader";
+import FontText from "../../Component-System/FontText/FontText";
 
 
-export type EventScreenProps = NativeStackScreenProps<EventProps, 'Event'>;
-const EventPage3 = memo(({route, navigation}: EventScreenProps) => {
+export type RecordScreenProps = NativeStackScreenProps<RecordPageProps, 'Record'>;
+const RecordPage3 = memo(({route, navigation}: RecordScreenProps) => {
   const {height, width} = Dimensions.get("window");
   const [showAccessory, setShowAccessory] = useState<boolean>(false)
   const keyboardRef = useRef<TextInput | null>()
@@ -44,7 +44,7 @@ const EventPage3 = memo(({route, navigation}: EventScreenProps) => {
   }
 
   const onPressRegisterButton = () => {
-    navigation.navigate("Page4")
+    navigation.navigate("LastPage")
   }
 
   return (
@@ -58,9 +58,9 @@ const EventPage3 = memo(({route, navigation}: EventScreenProps) => {
             </Text>
           </View>
           <TouchableOpacity onPress={onPressRegisterButton} style={styles.headerButtonContainer}>
-            <MyText style={styles.headerButton} size={"m"}>
+            <FontText style={styles.headerButton} size={"m"} weight={'bold'}>
               등록하기
-            </MyText>
+            </FontText>
           </TouchableOpacity>
         </View>
         <View style={styles.second}>
@@ -88,15 +88,8 @@ const EventPage3 = memo(({route, navigation}: EventScreenProps) => {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-      {/*<TouchableWithoutFeedback onPress={() => {*/}
-      {/*  console.log(123)*/}
-      {/*}}>*/}
-      {/*  <View style={styles.buttonBox}>*/}
-      {/*    <Text style={{fontSize: 17, fontWeight: "600", color: "#0F3AD1"}}>등록하기</Text>*/}
-      {/*  </View>*/}
-      {/*</TouchableWithoutFeedback>*/}
     </View>
   )
 })
 
-export default EventPage3
+export default RecordPage3

@@ -21,6 +21,19 @@ export const styles = StyleSheet.create({
     padding: 20,
     color: '#0F3AD1'
   },
+  closeButtonContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    paddingLeft: 20,
+    paddingBottom: 20,
+    backgroundColor: "white"
+  },
+  closeButton: {
+    ...border(['a']),
+    paddingHorizontal: 15,
+    paddingVertical: 6,
+
+  },
   container: {
     width: '100%',
     height: '100%',
@@ -47,7 +60,25 @@ export const styles = StyleSheet.create({
     position: "absolute",
     width: '100%',
     backgroundColor: "white"
-  }
+  },
+  buttonBox: {
+    flex: 1,
+    paddingHorizontal: 20,
+    // paddingVertical: 40,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  flagButton: {
+    ...border(['a']),
+    width: 100,
+    height: 40,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
   // resultBox: {
   //   width: '100%',
   //   height: '100%',

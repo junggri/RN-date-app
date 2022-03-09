@@ -1,5 +1,5 @@
 import React, {FC, memo} from 'react'
-import {Text} from 'react-native'
+import {StyleProp, Text, ViewStyle} from 'react-native'
 
 interface Props {
   children: any
@@ -7,10 +7,12 @@ interface Props {
   weight: "lighter" | "light" | "bold" | "bolder"
   lan?: 'ko' | 'en'
   type?: 'main' | 'normal'
-  style?: any
+  style?: StyleProp<ViewStyle>
+  color?: string
+  numberOfLine?: number
 }
 
-const FontText: FC<Props> = memo(({children, size, style, type = "normal", weight = "light", lan = "ko"}) => {
+const FontText: FC<Props> = memo(({children, size, style, type = "normal", weight = "light", lan = "ko", numberOfLine = 2}) => {
 
   const setFontSize = () => {
     let fontSize: number = 0
@@ -48,9 +50,9 @@ const FontText: FC<Props> = memo(({children, size, style, type = "normal", weigh
       fontSize: setFontSize(),
       color: type === "main" ? "#0F3AD1" : "black",
       fontFamily: setFontFamily(),
-      ...style
+      ...style,
     }}
-          numberOfLines={2}
+          numberOfLines={numberOfLine}
     >
       {children}
     </Text>

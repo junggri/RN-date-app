@@ -76,7 +76,7 @@ const Home = memo(({navigation, route}: HomeScreenProps) => {
       <TouchableWithoutFeedback onPress={onPressHistory}>
         <View style={[, {height: (height - bottomHeight - headerHeight) / 3}]}>
           <View style={styles.textBox}>
-            <Text style={styles.text}>"HISTORY"</Text>
+            <Text style={styles.text}>"RECORD"</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>

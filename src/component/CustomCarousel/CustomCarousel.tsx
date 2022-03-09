@@ -1,34 +1,68 @@
-import React, {FC, ReactNode} from 'react'
-import {FlatList, ListRenderItem, View} from "react-native";
+import React, {FC, ReactNode, useEffect, useState} from 'react'
+import {FlatList, ListRenderItem, ListRenderItemInfo, View} from "react-native";
 import {RootStackParams} from "../../../App";
+import border from "../../libs/setBorder";
 
 interface Props {
   data: any
-  // renderItem: (item: ListRenderItem<any>) => void
   gap: number,
   offset: number
   pageWidth: number
   child: any
+  perPage?: number
 }
 
 
-const CustomCarousel: FC<Props> = ({data, gap, pageWidth, offset, child}) => {
+const CustomCarousel: FC<Props> = ({data, gap, pageWidth, offset, child, perPage}) => {
   const Child = child
+  const [perPageData, setPerPageData] = useState<ListRenderItemInfo<any>[] | ListRenderItem<any>>([])
 
-  const renderItem = () => {
+
+  useEffect(() => {
+    if (!perPage) {
+      return
+    }
+
+    const multiple = Math.floor(data.length / perPage);
+    let array = []
+    let depthArray = []
+
+    data.forEach((e, i) => {
+      if (i >= perPage * multiple) {
+        depthArray.push(e)
+        if (i === data.length - 1) {
+          array.push(depthArray)
+        }
+      } else {
+        depthArray.push(e)
+        if (i % perPage === perPage - 1) {
+          array.push(depthArray)
+          depthArray = []
+        }
+      }
+    })
+
+    setPerPageData(array)
+  }, [data])
+
+
+  const renderItem = (data: ListRenderItem<any>) => {
+
     return (
       <Child
         style={{width: pageWidth, marginHorizontal: gap / 2}}
+        data={data}
       />
     )
   }
 
-  return (}
+  return (
     <View>
       <FlatList
         automaticallyAdjustContentInsets={false}
         contentContainerStyle={{paddingHorizontal: offset + gap / 2}}
-        data={data}
+        // contentContainerStyle={{paddingLeft: 20}}
+        data={perPage ? perPageData : data}
         decelerationRate='fast'
         horizontal
         renderItem={renderItem}
@@ -36,7 +70,6 @@ const CustomCarousel: FC<Props> = ({data, gap, pageWidth, offset, child}) => {
         snapToAlignment="start"
         showsHorizontalScrollIndicator={false}
       />
-
     </View>
   )
 }

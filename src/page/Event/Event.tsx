@@ -32,26 +32,6 @@ const Event = memo(({route, navigation}: HomeScreenProps) => {
   const [year, setYear] = useState<number>(0);
   const [month, setMonth] = useState<number>(0);
 
-  // const renderEventItem = useMemo(() => {
-  //   const now = new Date();
-  //   const testDate = new Date(2022, 1, 10);
-  //   const nextDate = testDate.getDate()
-  //   const nowDate = now.getDate()
-  //   const interval = nextDate - nowDate;
-  //
-  //   return new Array(3).fill(0).map((e, i) => {
-  //     return (
-  //       <TouchableOpacity
-  //         key={i}
-  //         onPress={() => {
-  //           navigation.navigate("EventDetail" as RootStackParams[EventDetail], {data: e} as any)
-  //         }}
-  //       >
-  //         <EventItem width={width} interval={interval}/>
-  //       </TouchableOpacity>
-  //     )
-  //   })
-  // }, [])
 
   return (
     <EventStack.Navigator initialRouteName={"Page1"} screenOptions={{headerShown: false}}>

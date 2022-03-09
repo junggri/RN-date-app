@@ -18,7 +18,7 @@ const Place: FC<Props> = memo(() => {
   return (
     <PlaceStack.Navigator initialRouteName={"PlacePage1"} screenOptions={{headerShown: false}}>
       <PlaceStack.Screen name={"PlacePage1"} component={PlacePage1}/>
-      <PlaceStack.Screen name={"PlacePage2"} component={PlacePage2}/>
+      <PlaceStack.Screen name={"PlacePage2"} component={PlacePage2} options={{gestureEnabled: false}}/>
     </PlaceStack.Navigator>
   )
 })

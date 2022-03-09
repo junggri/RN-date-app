@@ -18,18 +18,22 @@ import Rest from "./src/page/Rest/Rest";
 import EventRecord from "./src/page/EventRecord/EventRecord";
 import Picture from "./src/page/Picture/Picture";
 import Header from "./src/component/Header/Header";
+import LastPage from "./src/component/LastPage/LastPage";
+import Record from "./src/page/Record/Record";
 
 
 export type RootStackParams = {
   Home: undefined,
   Event: undefined,
-  EventDetail: {
-    type: string
-  },
+  // EventDetail: {
+  //   type: string
+  // },
   Register: undefined,
   Place: undefined
   Rest: undefined
   Picture: undefined
+  LastPage: undefined
+  Record: undefined
 }
 
 const RootStack = createStackNavigator<RootStackParams>();
@@ -37,14 +41,15 @@ const RootStack = createStackNavigator<RootStackParams>();
 const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName={"Place"} screenOptions={{headerShown: false}}>
+      <RootStack.Navigator initialRouteName={"Home"} screenOptions={{headerShown: false}}>
         <RootStack.Screen name={'Home'} component={Home}/>
         <RootStack.Screen name={"Event"} component={Event} options={{gestureEnabled: false}}/>
-        <RootStack.Screen name={"EventDetail"} component={EventDetail}/>
         <RootStack.Screen name={"Register"} component={Register}/>
-        <RootStack.Screen name={"Place"} component={Place}/>
+        <RootStack.Screen name={"Place"} component={Place} options={{gestureEnabled: false}}/>
         <RootStack.Screen name={"Rest"} component={Rest}/>
         <RootStack.Screen name={"Picture"} component={Picture}/>
+        <RootStack.Screen name={"Record"} component={Record}/>
+        <RootStack.Screen name={"LastPage"} component={LastPage} options={{gestureEnabled: false}}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
