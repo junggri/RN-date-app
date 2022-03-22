@@ -1,26 +1,19 @@
-//main Color #0F3AD1
-import React, {memo, useMemo, useState} from 'react'
+import React, {memo, useEffect, useMemo, useState} from 'react'
 import {
-  Button,
   Dimensions,
-  Image,
-  ImageBackground,
-  LayoutChangeEvent,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text, TouchableOpacity,
+  Text,
   TouchableWithoutFeedback,
   View
 } from 'react-native'
 import useGetDateCount from "../../hooks/useGetDateCount";
-import Arrow from "../../public/images/arrow.svg"
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParams} from "../../../App";
 import {styles} from "./Home.Style"
 import Header from "../../component/Header/Header";
 import Bottom from "../../component/Bottom/Bottom";
-import FontText from "../../Component-System/FontText/FontText";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../reducer";
+import {PlaceActions} from "../../reducer/Place";
 
 const {height, width} = Dimensions.get('window')
 
@@ -33,18 +26,6 @@ const Home = memo(({navigation, route}: HomeScreenProps) => {
   const [bottomHeight, setBottomHeight] = useState<number>(0)
   const [headerHeight, setHeaderHeight] = useState<number>(0)
 
-  const onPressEvent = () => {
-    // navigation.push({key: "init", name: "Date"})
-  }
-
-  const onLayOut = (e: LayoutChangeEvent) => {
-    setRecordTextWidth(e.nativeEvent.layout.width)
-  }
-
-  const layoutHeader = (e: LayoutChangeEvent) => {
-    setBottomHeight(e.nativeEvent.layout.height)
-  }
-
   const onPressRegister = () => {
     navigation.navigate("Register" as RootStackParams[Register])
   }
@@ -56,6 +37,8 @@ const Home = memo(({navigation, route}: HomeScreenProps) => {
   const onPressHistory = () => {
     navigation.navigate("Record" as RootStackParams[Rocord])
   }
+
+
   return (
     <View style={styles.home}>
       <Header setHeaderHeight={setHeaderHeight}/>

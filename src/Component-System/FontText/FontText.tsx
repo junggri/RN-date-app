@@ -1,5 +1,6 @@
 import React, {FC, memo} from 'react'
-import {StyleProp, Text, ViewStyle} from 'react-native'
+import {StyleProp, Text, TextStyle, View, ViewStyle} from 'react-native'
+import border from "../../libs/setBorder";
 
 interface Props {
   children: any
@@ -7,7 +8,7 @@ interface Props {
   weight: "lighter" | "light" | "bold" | "bolder"
   lan?: 'ko' | 'en'
   type?: 'main' | 'normal'
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<TextStyle>
   color?: string
   numberOfLine?: number
 }
@@ -46,16 +47,20 @@ const FontText: FC<Props> = memo(({children, size, style, type = "normal", weigh
   }
 
   return (
+    // <View style={{flexDirection: "row"}}>
     <Text style={{
+      // width: '100%',
       fontSize: setFontSize(),
       color: type === "main" ? "#0F3AD1" : "black",
       fontFamily: setFontFamily(),
+      // flexShrink: 1,
       ...style,
     }}
           numberOfLines={numberOfLine}
     >
       {children}
     </Text>
+    // </View>
   )
 });
 

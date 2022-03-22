@@ -34,10 +34,12 @@ export const styles = StyleSheet.create({
     height: 30,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: "center"
+    justifyContent: "center",
+    // backgroundColor: "#0F3AD1"
   },
   text: {
-    fontSize: 15
+    fontSize: 15,
+    // color: "white"
   }
 
 })

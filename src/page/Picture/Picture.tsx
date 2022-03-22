@@ -5,8 +5,11 @@ import {styles} from "./Picture.styles"
 import AnimatedValue = Animated.AnimatedValue;
 import AnimatedComponent = Animated.AnimatedComponent;
 import Cancel from "../../public/images/cancel.svg"
+import {useDispatch} from "react-redux";
+import {requestAction} from "../../reducer/test";
 
 const Picture = memo(() => {
+  const dispatch = useDispatch();
   const {height, width} = Dimensions.get("window")
   const [show, setShow] = useState<boolean>(false);
   const [opacity, setOpacity] = useState<AnimatedValue>(new Animated.Value(0))
@@ -35,6 +38,7 @@ const Picture = memo(() => {
     })
   }, [])
 
+
   useEffect(() => {
     Animated.timing(opacity, {
       toValue: 1,
@@ -62,7 +66,7 @@ const Picture = memo(() => {
   return (
     <View style={{flex: 1, backgroundColor: "white"}}>
       <View>
-        <PageHeader/>
+        <PageHeader header={"PICTURE"}/>
       </View>
       <View style={{flex: 1, width: width, paddingBottom: 20}}>
         <ScrollView showsVerticalScrollIndicator={false}>

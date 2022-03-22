@@ -1,11 +1,6 @@
 import React, {memo, useMemo, useState} from 'react'
-import {
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
 import {RootStackParams} from "../../../App";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
-import PastEvent from "../../component/PastEvent/PastEvent";
 import {createStackNavigator} from "@react-navigation/stack";
 import EventPage1 from "../../component/Event/EventPage1/EventPage1";
 import EventPage2 from "../../component/Event/EventPage2/EventPage2";
@@ -14,7 +9,6 @@ import EventPage4 from "../../component/Event/EventPage4/EventPage4";
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParams, 'Event'>;
 
-// const EventStack = createStackNavigator<RootStackParams>();
 export interface EventProps {
   page1: undefined,
   page2: undefined
@@ -25,13 +19,6 @@ export interface EventProps {
 const EventStack = createStackNavigator<EventProps>();
 
 const Event = memo(({route, navigation}: HomeScreenProps) => {
-  const [gap, setGap] = useState(16)
-  const [offset, setOffset] = useState(20)
-
-  const {height, width} = Dimensions.get('window');
-  const [year, setYear] = useState<number>(0);
-  const [month, setMonth] = useState<number>(0);
-
 
   return (
     <EventStack.Navigator initialRouteName={"Page1"} screenOptions={{headerShown: false}}>

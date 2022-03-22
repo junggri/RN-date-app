@@ -18,17 +18,18 @@ export const styles = StyleSheet.create({
     ...border(['t']),
     position: 'absolute',
     bottom: 0,
-    height: 80,
+    height: 70,
     width: '100%',
     display: 'flex',
     flexDirection: "row",
     justifyContent: "space-between",
-    borderColor: "rgba(0,0,0,0.2)"
+    // borderColor: "rgba(0,0,0,0.2)"
   },
   button: {
     flex: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: "center"
+    // marginTop: 20
   }
 })

@@ -19,6 +19,9 @@ import NaverMap from "../Map/Map";
 import PageHeader from "../PageHeader/PageHeader";
 import FontText from "../../Component-System/FontText/FontText";
 import PlaceResult from "../PlaceResult/PlaceResult";
+import {fetcher} from "../../core/fetcher";
+import {CREATE_PLACE} from "../../core/mutation";
+import {Place, PlaceInput, Scalars} from "../../core/schema";
 
 
 interface Props {
@@ -48,7 +51,8 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
   const fetchGeocoding = async (address: string) => {
     const {data} = await axios.post(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBwtQVsUqUL64u_0JlbjAYSIW-By7ykG_c`
-    )
+    );
+
     setCoordinate({
       latitude: data.results[0].geometry.location.lat,
       longitude: data.results[0].geometry.location.lng,
@@ -65,6 +69,30 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
     }).start()
     setDecrease(new Animated.Value(0))
     setIsSelect(false)
+  }
+
+  const createPlace = async () => {
+    if (!place) {
+      return
+    }
+
+    const result = await fetcher.fetch().mutation<{ data: { insertPlace: string } }, PlaceInput>(CREATE_PLACE, {
+      data: {
+        buildingName: place.buildingName,
+        latitude: coordinate.latitude,
+        longitude: coordinate.longitude,
+        roadAddress: place.roadAddress,
+        who: "ey"
+      }
+    })
+
+    if (result.data) {
+      navigation.navigate("PlacePage2")
+    } else {
+
+    }
+
+
   }
 
   const handleSelected = (data: Address | null) => {
@@ -106,6 +134,7 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
     inputRange: [0, 1],
     outputRange: [height, 0]
   })
+
 
   useEffect(() => {
     Animated.sequence([
@@ -173,9 +202,7 @@ const PlacePage1: FC<Props> = memo(({route, navigation}: PlaceScreenProps) => {
                     </FontText>
                  </View>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {
-                navigation.navigate("PlacePage2")
-              }}>
+              <TouchableOpacity onPress={createPlace}>
                  <View style={styles.flagButton}>
                     <FontText weight={"bold"} size={"m"}>
                        등록

@@ -1,4 +1,4 @@
-export default function createActions<T extends string>(type: string) {
+export default function createActionType<T extends string>(type: string) {
   return {
     REQUEST: type + "/REQUEST",
     SUCCESS: type + "/SUCCESS",

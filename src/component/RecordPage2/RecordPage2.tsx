@@ -7,6 +7,7 @@ import NaverMap from "../../component/Map/Map";
 import {Asset, launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import PageHeader from "../../component/PageHeader/PageHeader";
 import FontText from "../../Component-System/FontText/FontText";
+import ScrollImage from "../ScrollImage/ScrollImage";
 
 interface Props {
 }
@@ -81,30 +82,7 @@ const RecordPage2 = memo(({route, navigation}: RecordScreenProps) => {
             height={300}
           />
         </View>
-        <View style={styles.picture}>
-          <FontText size={'l'} weight={"bold"} style={{paddingHorizontal: 20, fontWeight: '500'}}>
-            오늘의 사진
-          </FontText>
-          <ScrollView
-            style={[{marginTop: 15}]}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {renderImage}
-            <View style={{display: 'flex', flexWrap: 'wrap'}}>
-              <TouchableOpacity onPress={pressImage}>
-                <View style={[styles.pictureButton, {marginLeft: !imageAsset.length ? 20 : 10}]}>
-                  <Text style={{
-                    color: '#0F3AD1',
-                    fontSize: 12,
-                  }}>
-                    추가
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </View>
+        <ScrollImage/>
       </View>
       <View style={styles.buttonBox}>
         <TouchableOpacity onPress={() => {

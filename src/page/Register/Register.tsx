@@ -8,6 +8,8 @@ import PageTextButton from "../../Component-System/PageTextButton/PageTextButton
 import Carousel from "../../component/Carousel/Carousel";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {RootStackParams} from "../../../App";
+import {fetcher} from "../../core/fetcher";
+import {GET_PLACE} from "../../core/query";
 
 
 export type RegisterProps = {
@@ -33,6 +35,7 @@ const Register = memo(({navigation, route}: RegisterScreenProps) => {
     setHeaderH(e.nativeEvent.layout.height)
   }
 
+
   const pages = [
     {
       title: "Date",
@@ -48,11 +51,10 @@ const Register = memo(({navigation, route}: RegisterScreenProps) => {
     }
   ]
 
-
   return (
     <View style={styles.container}>
       <View onLayout={onLayout}>
-        <PageHeader/>
+        <PageHeader header={'REGISTER'}/>
       </View>
       <View style={[styles.body, {height: height - headerH}]}>
         <Carousel
